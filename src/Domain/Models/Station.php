@@ -49,7 +49,7 @@ class Station
     private $city;
 
     /**
-     * Station constructor.-
+     * Station constructor.
      */
     public function __construct()
     {

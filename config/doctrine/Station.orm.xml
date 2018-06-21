@@ -4,15 +4,15 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                    https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-                    <entity name="App\Domain\Models\Sation" table="tapandgo_cities"
-                            repository-class="App\Infra\Doctrine\CitiesRepository">
+                    <entity name="App\Domain\Models\Station" table="tapandgo_station"
+                            repository-class="App\Infra\Doctrine\StationRepository">
                         <id name="id" type="uuid"/>
                         <field name="name" type="string"/>
                         <field name="posGps" type="string"/>
                         <field name="adress" type="string"/>
                         <field name="capacity" type="integer"/>
                         <field name="nberBikes" type="integer"/>
-                        <many-to-one field="city" target-entity="App\Domain\Models\Cities"
+                        <many-to-one field="city" target-entity="App\Domain\Models\City"
                                      inversed-by="stations">
                         </many-to-one>
                     </entity>

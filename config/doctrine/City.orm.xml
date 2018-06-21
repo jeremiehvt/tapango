@@ -4,12 +4,13 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                    https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-                <entity name="App\Domain\Models\City" table="tapandgo_cities"
-                        repository-class="App\Infra\Doctrine\CitiesRepository">
+                <entity name="App\Domain\Models\City" table="tapandgo_city"
+                        repository-class="App\Infra\Doctrine\CityRepository">
+                    <id name="id" type="uuid"/>
                     <field name="name" type="string"/>
                     <field name="posGps" type="string"/>
                     <field name="status" type="boolean"/>
-                    <one-to-many field="stations" target-entity="App\Domain\Models\Stations"
+                    <one-to-many field="stations" target-entity="App\Domain\Models\Station"
                                  mapped-by="city">
                         <cascade>
                             <cascade-persist/>

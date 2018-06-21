@@ -8,7 +8,6 @@
 
 namespace App\Domain\Models;
 
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Ramsey\Uuid\Uuid;
@@ -37,7 +36,7 @@ class City
     private $status;
 
     /**
-     *
+     * @var ArrayCollection
      */
     private $stations;
 
