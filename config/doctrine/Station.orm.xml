@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                   https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+                    <entity name="App\Domain\Models\Sation" table="tapandgo_cities"
+                            repository-class="App\Infra\Doctrine\CitiesRepository">
+                        <id name="id" type="uuid"/>
+                        <field name="name" type="string"/>
+                        <field name="posGps" type="string"/>
+                        <field name="adress" type="string"/>
+                        <field name="capacity" type="integer"/>
+                        <field name="nberBikes" type="integer"/>
+                        <many-to-one field="city" target-entity="App\Domain\Models\Cities"
+                                     inversed-by="stations">
+                        </many-to-one>
+                    </entity>
+
+</doctrine-mapping>
