@@ -8,20 +8,31 @@
 
 namespace App\DataFixtures;
 
-
+use App\Domain\Models\Bike;
 use App\Domain\Models\City;
 use App\Domain\Models\PosGps;
 use App\Domain\Models\Station;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Class CityFixtures
+ * @package App\DataFixtures
+ */
 class CityFixtures extends Fixture
 {
 
     public function load(ObjectManager $manager)
     {
         $arrayOfStation = [];
+        $arrayOfBikes = [];
+
         for ($i = 0 ; $i < 80; $i++) {
+
+            $bike = new Bike();
+            $bike->setAvailable(true);
+
+            $arrayOfBikes[] = $bike;
 
             $posGps = new PosGps();
             $posGps->setLong(' -1.' . mt_rand(531789, 543752))
@@ -32,10 +43,15 @@ class CityFixtures extends Fixture
             $station->setName('one station')
                 ->setPosGps($posGps)
                 ->setStatus(true)
-                ->setCapacity(100)
-                ->setAdress('1 rue de la commune')
-                ->setNberBikes(mt_rand(20, 100))
+                ->setBikesCapacity(100)
+                ->setAddress('1 rue de la commune')
+                ->setBikesAvailable(100)
             ;
+
+            foreach ($arrayOfBikes as $value) {
+                $station->addBikes($value);
+            }
+
 
             $arrayOfStation[] = $station;
         }

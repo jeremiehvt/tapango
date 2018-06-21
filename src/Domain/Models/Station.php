@@ -8,6 +8,8 @@
 
 namespace App\Domain\Models;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -31,22 +33,37 @@ class Station
     /**
      * @var string
      */
-    private $adress;
+    private $address;
 
     /**
      * @var integer
      */
-    private $capacity;
+    private $bikesCapacity;
 
     /**
      * @var integer
      */
-    private $nberBikes;
+    private $bikesAvailable;
 
     /**
      * @var boolean
      */
     private $status;
+
+    /**
+     * @var string
+     */
+    private $creationDate = "";
+
+    /**
+     * @var string
+     */
+    private $lastUpdate = "";
+
+    /**
+     * @var ArrayCollection
+     */
+    private $bikes;
 
     /**
      * @var City
@@ -59,6 +76,7 @@ class Station
     public function __construct()
     {
         $this->id = Uuid::uuid4();
+        $this->bikes = new ArrayCollection();
     }
 
     /**
@@ -110,18 +128,18 @@ class Station
     /**
      * @return string
      */
-    public function getAdress(): string
+    public function getAddress(): string
     {
-        return $this->adress;
+        return $this->address;
     }
 
     /**
-     * @param $adress
+     * @param $address
      * @return $this
      */
-    public function setAdress($adress):self
+    public function setAddress($address):self
     {
-        $this->adress = $adress;
+        $this->address = $address;
 
         return $this;
     }
@@ -129,18 +147,18 @@ class Station
     /**
      * @return int
      */
-    public function getCapacity(): int
+    public function getBikesCapacity(): int
     {
-        return $this->capacity;
+        return $this->bikesCapacity;
     }
 
     /**
-     * @param $capacity
+     * @param $bikesCapacity
      * @return $this
      */
-    public function setCapacity($capacity): self
+    public function setbikesCapacity($bikesCapacity): self
     {
-        $this->capacity = $capacity;
+        $this->bikesCapacity = $bikesCapacity;
 
         return $this;
     }
@@ -148,18 +166,18 @@ class Station
     /**
      * @return int
      */
-    public function getNberBikes(): int
+    public function getBikesAvailable(): int
     {
-        return $this->nberBikes;
+        return $this->bikesAvailable;
     }
 
     /**
-     * @param $nberBikes
+     * @param $bikesAvailable
      * @return $this
      */
-    public function setNberBikes($nberBikes): self
+    public function setBikesAvailable($bikesAvailable): self
     {
-        $this->nberBikes = $nberBikes;
+        $this->bikesAvailable = $bikesAvailable;
 
         return $this;
     }
@@ -183,6 +201,45 @@ class Station
     }
 
     /**
+     * @return $this
+     */
+    public function setCreationDate(): self
+    {
+        $date = new \DateTime();
+        $this->creationDate = $date->format(DATE_ATOM);
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setUpdateDate(): self
+    {
+        $this->lastUpdate = "";
+        $date = new \DateTime();
+        $this->lastUpdate = $date->format(DATE_ATOM);
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreationDate(): string
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastUpdate(): string
+    {
+        return $this->lastUpdate;
+    }
+
+    /**
      * @param City $city
      * @return $this
      */
@@ -199,5 +256,41 @@ class Station
     public function getCity(): City
     {
         return $this->city;
+    }
+
+    /**
+     * @return Collection|Bike[]
+     */
+    public function getBikes(): Collection
+    {
+        return $this->bikes;
+    }
+
+    /**
+     * @param Bike $bike
+     * @return Station
+     */
+    public function addBikes(Bike $bike): self
+    {
+        if (!$this->bikes->contains($bike)) {
+            $this->bikes[] = $bike;
+            $bike->setStation($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Bike $bike
+     */
+    public function removeBikes(Bike $bike): void
+    {
+        if ($this->bikes->contains($bike)) {
+            $this->bikes->remove($bike);
+
+            if ($bike->getStation() === $this) {
+                $bike->setStation(null);
+            }
+        }
     }
 }

@@ -7,9 +7,7 @@
                     <entity name="App\Domain\Models\PosGps" table="tapandgo_posgps"
                             repository-class="App\Infra\Doctrine\Repository">
                         <id name="id" type="uuid"/>
-                        <field name="lat" type="string"/>
-                        <field name="long" type="string"/>
+                        <field name="lat" type="decimal"/>
+                        <field name="long" type="decimal"/>
                     </entity>
-
-
 </doctrine-mapping>

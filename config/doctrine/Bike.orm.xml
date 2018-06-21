@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                   https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+                    <entity name="App\Domain\Models\Bike" table="tapandgo_bike"
+                            repository-class="App\Infra\Doctrine\Repository\BikeRepository">
+                        <id name="id" type="uuid"/>
+                        <field name="takeAt" type="string" nullable="true"/>
+                        <field name="dropAt" type="string" nullable="true"/>
+                        <field name="available" type="boolean"/>
+
+                        <lifecycle-callbacks>
+                            <lifecycle-callback type="prePersist" method="setTakeAt"/>
+                            <lifecycle-callback type="preUpdate" method="setDropAt"/>
+                        </lifecycle-callbacks>
+
+                        <many-to-one field="station" target-entity="App\Domain\Models\Station"
+                                     inversed-by="bikes"/>
+                    </entity>
+</doctrine-mapping>

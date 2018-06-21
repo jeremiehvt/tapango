@@ -8,13 +8,15 @@
                             repository-class="App\Infra\Doctrine\StationRepository">
                         <id name="id" type="uuid"/>
                         <field name="name" type="string"/>
-                        <field name="adress" type="string"/>
-                        <field name="capacity" type="integer"/>
-                        <field name="nberBikes" type="integer"/>
+                        <field name="address" type="string"/>
+                        <field name="bikesCapacity" type="integer"/>
+                        <field name="bikesAvailable" type="integer"/>
+                        <field name="creationDate" type="string" nullable="true"/>
+                        <field name="lastUpdate" type="string" nullable="true"/>
                         <field name="status" type="boolean"/>
                         <many-to-one field="city" target-entity="App\Domain\Models\City"
-                                     inversed-by="stations">
-                        </many-to-one>
+                                     inversed-by="stations"/>
+
                         <one-to-one field="posGps"
                                     target-entity="App\Domain\Models\PosGps">
                             <cascade>
@@ -22,5 +24,19 @@
                                 <cascade-remove/>
                             </cascade>
                         </one-to-one>
+
+                        <one-to-many field="bikes" target-entity="App\Domain\Models\Bike"
+                                     mapped-by="station">
+                            <cascade>
+                                <cascade-persist/>
+                                <cascade-remove/>
+                            </cascade>
+                        </one-to-many>
+
+                        <lifecycle-callbacks>
+                            <lifecycle-callback type="prePersist" method="setCreationDate"/>
+                            <lifecycle-callback type="preUpdate" method="setUpdateDate"/>
+                        </lifecycle-callbacks>
+
                     </entity>
 </doctrine-mapping>
