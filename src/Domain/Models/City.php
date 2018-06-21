@@ -26,7 +26,7 @@ class City
     private $name;
 
     /**
-     * @var string
+     * @var PosGps
      */
     private $posGps;
 
@@ -74,18 +74,18 @@ class City
     }
 
     /**
-     * @return string
+     * @return PosGps
      */
-    public function getPosGps(): string
+    public function getPosGps(): PosGps
     {
         return $this->posGps;
     }
 
     /**
-     * @param string $posGps
+     * @param PosGps $posGps
      * @return $this
      */
-    public function setPosGps($posGps):self
+    public function setPosGps(PosGps $posGps):self
     {
         $this->posGps = $posGps;
 

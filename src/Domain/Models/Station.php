@@ -24,7 +24,7 @@ class Station
     private $name;
 
     /**
-     * @var string
+     * @var PosGps
      */
     private $posGps;
 
@@ -42,6 +42,11 @@ class Station
      * @var integer
      */
     private $nberBikes;
+
+    /**
+     * @var boolean
+     */
+    private $status;
 
     /**
      * @var City
@@ -84,18 +89,18 @@ class Station
     }
 
     /**
-     * @return string
+     * @return PosGps
      */
-    public function getPosGps(): string
+    public function getPosGps(): PosGps
     {
         return $this->posGps;
     }
 
     /**
-     * @param $posGps
+     * @param PosGps $posGps
      * @return $this
      */
-    public function setPosGps($posGps):self
+    public function setPosGps(PosGps $posGps):self
     {
         $this->posGps = $posGps;
 
@@ -157,6 +162,24 @@ class Station
         $this->nberBikes = $nberBikes;
 
         return $this;
+    }
+
+    /**
+     * @param bool $status
+     * @return $this
+     */
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStatus(): bool
+    {
+        return $this->status;
     }
 
     /**

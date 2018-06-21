@@ -8,13 +8,19 @@
                             repository-class="App\Infra\Doctrine\StationRepository">
                         <id name="id" type="uuid"/>
                         <field name="name" type="string"/>
-                        <field name="posGps" type="string"/>
                         <field name="adress" type="string"/>
                         <field name="capacity" type="integer"/>
                         <field name="nberBikes" type="integer"/>
+                        <field name="status" type="boolean"/>
                         <many-to-one field="city" target-entity="App\Domain\Models\City"
                                      inversed-by="stations">
                         </many-to-one>
+                        <one-to-one field="posGps"
+                                    target-entity="App\Domain\Models\PosGps">
+                            <cascade>
+                                <cascade-persist/>
+                                <cascade-remove/>
+                            </cascade>
+                        </one-to-one>
                     </entity>
-
 </doctrine-mapping>

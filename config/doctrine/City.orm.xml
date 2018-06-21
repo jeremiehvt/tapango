@@ -8,7 +8,6 @@
                         repository-class="App\Infra\Doctrine\CityRepository">
                     <id name="id" type="uuid"/>
                     <field name="name" type="string"/>
-                    <field name="posGps" type="string"/>
                     <field name="status" type="boolean"/>
                     <one-to-many field="stations" target-entity="App\Domain\Models\Station"
                                  mapped-by="city">
@@ -17,5 +16,13 @@
                             <cascade-remove/>
                         </cascade>
                     </one-to-many>
+
+                    <one-to-one field="posGps"
+                                target-entity="App\Domain\Models\PosGps">
+                        <cascade>
+                            <cascade-persist/>
+                            <cascade-remove/>
+                        </cascade>
+                    </one-to-one>
                 </entity>
 </doctrine-mapping>
