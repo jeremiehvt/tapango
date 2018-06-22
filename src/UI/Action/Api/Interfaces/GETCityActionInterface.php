@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types = 1);
+
 /**
  * Created by PhpStorm.
  * User: havartjeremie
@@ -9,7 +12,9 @@
 namespace App\UI\Action\Api\Interfaces;
 
 
+use Symfony\Component\HttpFoundation\Request;
+
 interface GETCityActionInterface
 {
-    public function __invoke();
+    public function __invoke(Request $request);
 }

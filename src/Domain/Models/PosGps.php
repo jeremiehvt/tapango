@@ -80,5 +80,4 @@ class PosGps
         $this->long = $long;
         return $this;
     }
-
 }

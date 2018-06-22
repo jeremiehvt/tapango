@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types = 1);
+
 /**
  * Created by PhpStorm.
  * User: havartjeremie
@@ -7,7 +10,6 @@
  */
 
 namespace App\Infra\Doctrine\Repository;
-
 
 use App\Domain\Models\PosGps;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
