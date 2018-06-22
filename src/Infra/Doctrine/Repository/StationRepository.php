@@ -11,6 +11,7 @@ namespace App\Infra\Doctrine\Repository;
 use App\Domain\Models\Station;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * Class StationRepository
@@ -25,5 +26,20 @@ class StationRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Station::class);
+    }
+
+    public function getStation($id, $page, $lmt)
+    {
+        $qy = $this->createQueryBuilder('s')
+            ->innerJoin('s.city', 'c')
+            ->addSelect('c')
+            ->where('c.id = :id')
+            ->setParameter('id', $id)
+            ->setFirstResult(($page-1) * $lmt)
+            ->setMaxResults($lmt)
+            ->orderBy('s.creationDate')
+            ;
+
+        return new Paginator($qy, true);
     }
 }

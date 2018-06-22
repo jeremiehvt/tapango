@@ -37,6 +37,7 @@ class CityRepository extends ServiceEntityRepository
 
     /**
      * @param $page
+     * @param $lmt
      * @return Paginator
      */
     public function getCityByPage($page, $lmt)

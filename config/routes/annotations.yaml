@@ -3,5 +3,5 @@ controllers:
     type: annotation
 
 api:
-    resource: ../../src/UI/Action/Api
+    resource: ../../src/UI/Action/Api/
     type: annotation

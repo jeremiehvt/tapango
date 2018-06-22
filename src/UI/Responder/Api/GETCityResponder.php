@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types = 1);
+
 /**
  * Created by PhpStorm.
  * User: havartjeremie
@@ -7,7 +10,6 @@
  */
 
 namespace App\UI\Responder\Api;
-
 
 use App\UI\Responder\Api\Interfaces\GETCityResponderInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;

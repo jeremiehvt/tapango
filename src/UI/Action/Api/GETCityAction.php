@@ -54,21 +54,25 @@ class GETCityAction implements GETCityActionInterface
     /**
      * GETCityAction constructor.
      * @param GETCityResponderInterface $cityResponder
-     * @param SerializerInterface $serializer
-     * @param CityRepository $cityRepository
+     * @param SerializerInterface       $serializer
+     * @param CityRepository            $cityRepository
      */
     public function __construct(
         GETCityResponderInterface $cityResponder,
-        SerializerInterface $serializer,
-        CityRepository $cityRepository,
-                       $lmt
+        SerializerInterface       $serializer,
+        CityRepository            $cityRepository,
+                                  $lmt
     ) {
-        $this->cityResponder = $cityResponder;
-        $this->serializer = $serializer;
+        $this->cityResponder  = $cityResponder;
+        $this->serializer     = $serializer;
         $this->cityRepository = $cityRepository;
-        $this->lmt = $lmt;
+        $this->lmt            = $lmt;
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function __invoke(Request $request)
      {
         $responder = $this->cityResponder;
