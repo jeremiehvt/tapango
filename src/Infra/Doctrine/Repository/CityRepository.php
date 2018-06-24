@@ -56,4 +56,24 @@ class CityRepository extends ServiceEntityRepository
 
         return new Paginator($qy, true);
     }
+
+    public function getAllInfo()
+    {
+        $qy = $this->createQueryBuilder('c')
+                   ->leftJoin('c.posGps', 'p')
+                   ->addSelect('p')
+                   ->leftJoin('c.stations', 's')
+                   ->addSelect('s')
+                   ->leftJoin('s.bikes', 'b')
+                   ->addSelect('s')
+                   ->orderBy('c.name', 'ASC')
+
+            ;
+
+        $result = $qy
+            ->getQuery()
+            ->getArrayResult();
+
+        return $result;
+    }
 }
