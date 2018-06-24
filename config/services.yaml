@@ -3,6 +3,7 @@
 parameters:
     locale: 'en'
     lmt: 10
+    radius: 10
 
 services:
     # default configuration for services in *this* file
@@ -12,6 +13,7 @@ services:
         public: false       # Allows optimizing the container by removing unused services; this also means
         bind:
             $lmt: '%lmt%'
+            $radius: '%radius%'
                             # fetching services directly from the container via $container->get
                             # The best practice is to be explicit about your dependencies anyway.
 

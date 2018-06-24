@@ -42,4 +42,33 @@ class StationRepository extends ServiceEntityRepository
 
         return new Paginator($qy, true);
     }
+
+    public function getStationsByPos(array $data)
+    {
+        $qb = $this->createQueryBuilder('s');
+
+        $qy = $qb
+                   ->leftJoin('s.posGps', 'p')
+                   ->where($qb->expr()->between(
+                       'p.lat',
+                       ':minLat',
+                       ':maxLat'))
+
+                   ->andwhere($qb->expr()->between(
+                       'p.long',
+                       ':minLong',
+                       ':maxLong'))
+
+                   ->setParameters([
+                                       'maxLat'  => $data[0],
+                                       'minLat'  => $data[1],
+                                       'maxLong' => $data[2],
+                                       'minLong' => $data[3]
+                                   ])
+        ;
+
+        $result = $qy->getQuery()->getArrayResult();
+
+        return $result;
+    }
 }

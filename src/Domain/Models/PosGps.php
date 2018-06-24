@@ -20,12 +20,12 @@ class PosGps
     private $id;
 
     /**
-     * @var string
+     * @var double
      */
     private $lat;
 
     /**
-     * @var string
+     * @var double
      */
     private $long;
 
@@ -46,38 +46,38 @@ class PosGps
     }
 
     /**
-     * @return string
+     * @return float
      */
-    public function getLat(): string
+    public function getLat(): float
     {
         return $this->lat;
     }
 
     /**
-     * @param string $lat
+     * @param float $lat
      * @return $this
      */
-    public function setLat(string $lat): self
+    public function setLat(float $lat): self
     {
-        $this->lat = $lat;
+        $this->lat = (float)$lat;
         return $this;
     }
 
     /**
-     * @return string
+     * @return float
      */
-    public function getLong(): string
+    public function getLong(): float
     {
         return $this->long;
     }
 
     /**
-     * @param string $long
+     * @param float $long
      * @return $this
      */
-    public function setLong(string $long): self
+    public function setLong(float $long): self
     {
-        $this->long = $long;
+        $this->long = (float)$long;
         return $this;
     }
 }

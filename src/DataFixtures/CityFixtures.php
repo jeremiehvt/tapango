@@ -25,6 +25,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 class CityFixtures extends Fixture
 {
 
+    /**
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         $arrayOfStation = [];
@@ -38,8 +41,8 @@ class CityFixtures extends Fixture
             $arrayOfBikes[] = $bike;
 
             $posGps = new PosGps();
-            $posGps->setLong(' -1.' . mt_rand(531789, 543752))
-                   ->setLat('47.'. mt_rand(162918, 260402))
+            $posGps->setLong(floatval(' -1.' . mt_rand(531789, 543752)))
+                   ->setLat(floatval('47.'. mt_rand(162918, 260402)))
                 ;
 
             $station = new Station();
@@ -60,8 +63,8 @@ class CityFixtures extends Fixture
         }
 
         $posGpsCity = new PosGps();
-        $posGpsCity->setLat('47.218371')
-            ->setLong('-1.553621')
+        $posGpsCity->setLat(floatval('47.218371'))
+            ->setLong(floatval('-1.553621'))
             ;
 
         $city = new City();
