@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types = 1);
+
 /**
  * Created by PhpStorm.
  * User: havartjeremie
@@ -7,7 +10,6 @@
  */
 
 namespace App\Domain\Models;
-
 
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -59,6 +61,7 @@ class Bike
     public function setAvailable(bool $available): self
     {
         $this->available = $available;
+
         return $this;
     }
 
@@ -75,7 +78,6 @@ class Bike
      */
     public function setTakeAt(): self
     {
-        $this->dropAt = "";
         $date = new \DateTime();
         $this->takeAt = $date->format(DATE_RFC850);
 

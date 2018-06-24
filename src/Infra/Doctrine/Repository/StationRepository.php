@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types = 1);
+
 /**
  * Created by PhpStorm.
  * User: havartjeremie
@@ -28,6 +31,12 @@ class StationRepository extends ServiceEntityRepository
         parent::__construct($registry, Station::class);
     }
 
+    /**
+     * @param $id
+     * @param $page
+     * @param $lmt
+     * @return Paginator
+     */
     public function getStation($id, $page, $lmt)
     {
         $qy = $this->createQueryBuilder('s')
@@ -52,19 +61,21 @@ class StationRepository extends ServiceEntityRepository
                    ->where($qb->expr()->between(
                        'p.lat',
                        ':minLat',
-                       ':maxLat'))
+                       ':maxLat')
+                   )
 
                    ->andwhere($qb->expr()->between(
                        'p.long',
                        ':minLong',
-                       ':maxLong'))
+                       ':maxLong')
+                   )
 
                    ->setParameters([
-                                       'maxLat'  => $data[0],
-                                       'minLat'  => $data[1],
-                                       'maxLong' => $data[2],
-                                       'minLong' => $data[3]
-                                   ])
+                       'maxLat'  => $data[0],
+                       'minLat'  => $data[1],
+                       'maxLong' => $data[2],
+                       'minLong' => $data[3]
+                   ])
         ;
 
         $result = $qy->getQuery()->getArrayResult();

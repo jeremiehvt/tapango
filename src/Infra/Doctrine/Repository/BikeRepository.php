@@ -11,13 +11,12 @@ declare(strict_types = 1);
 
 namespace App\Infra\Doctrine\Repository;
 
-
 use App\Domain\Models\Bike;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * Class CityRepository
+ * Class BikeRepository
  * @package App\Infra\Doctrine\Repository
  * @method Bike|null find($id, $lockMode = null, $lockVersion = null)
  * @method Bike|null findOneBy(array $criteria, array $orderBy = null)
@@ -29,6 +28,11 @@ class BikeRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Bike::class);
+    }
+
+    public function update(): void
+    {
+        $this->_em->flush();
     }
 
 }

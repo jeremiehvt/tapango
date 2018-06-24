@@ -10,11 +10,6 @@
                         <field name="dropAt" type="string" nullable="true"/>
                         <field name="available" type="boolean"/>
 
-                        <lifecycle-callbacks>
-                            <lifecycle-callback type="prePersist" method="setTakeAt"/>
-                            <lifecycle-callback type="preUpdate" method="setDropAt"/>
-                        </lifecycle-callbacks>
-
                         <many-to-one field="station" target-entity="App\Domain\Models\Station"
                                      inversed-by="bikes"/>
                     </entity>

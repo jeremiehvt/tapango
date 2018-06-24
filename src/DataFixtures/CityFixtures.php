@@ -33,12 +33,16 @@ class CityFixtures extends Fixture
         $arrayOfStation = [];
         $arrayOfBikes = [];
 
-        for ($i = 0 ; $i < 80; $i++) {
+        for ($t = 0 ; $t < 100; $t++) {
 
             $bike = new Bike();
             $bike->setAvailable(true);
 
             $arrayOfBikes[] = $bike;
+        }
+
+        for ($i = 0 ; $i < 80; $i++) {
+
 
             $posGps = new PosGps();
             $posGps->setLong(floatval(' -1.' . mt_rand(531789, 543752)))
@@ -51,13 +55,13 @@ class CityFixtures extends Fixture
                 ->setStatus(true)
                 ->setBikesCapacity(100)
                 ->setAddress('1 rue de la commune')
-                ->setBikesAvailable(100)
             ;
+
 
             foreach ($arrayOfBikes as $value) {
                 $station->addBikes($value);
+                $station->setBikesAvailable(1);
             }
-
 
             $arrayOfStation[] = $station;
         }

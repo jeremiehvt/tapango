@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types = 1);
+
 /**
  * Created by PhpStorm.
  * User: havartjeremie
@@ -177,7 +180,7 @@ class Station
      */
     public function setBikesAvailable($bikesAvailable): self
     {
-        $this->bikesAvailable = $bikesAvailable;
+        $this->bikesAvailable += $bikesAvailable;
 
         return $this;
     }
